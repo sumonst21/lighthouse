@@ -904,49 +904,6 @@ class Driver {
   }
 
   /**
-   * Log a warning if an insecure security state is encountered
-   * @return {{promise: Promise<string>, cancel: function(): void}}
-   * @private
-   */
-  _monitorForInsecureState() {
-    /** @type {(() => void)} */
-    let cancel = () => {
-      throw new Error('_monitorForInsecureState.cancel() called before it was defined');
-    };
-
-    // We're only passively monitoring, not changing our waitForFullyLoaded behavior here
-    const promise = new Promise(_ => {});
-    /**
-     * @param {LH.Crdp.Security.SecurityStateChangedEvent} event
-     */
-    const onSecurityStateChanged = ({securityState, explanations, schemeIsCryptographic}) => {
-      if (securityState === 'insecure' && schemeIsCryptographic) {
-        cancel();
-        const insecureDescriptions = explanations
-          .filter(exp => exp.securityState === 'insecure')
-          .map(exp => exp.description);
-        log.warn('Driver', 'insecure security state', insecureDescriptions.join(' '));
-      }
-    };
-    let canceled = false;
-    cancel = () => {
-      if (canceled) return;
-      canceled = true;
-      this.off('Security.securityStateChanged', onSecurityStateChanged);
-      // TODO(@patrickhulce): cancel() should really be a promise itself to handle things like this
-      this.sendCommand('Security.disable').catch(() => {});
-    };
-    this.on('Security.securityStateChanged', onSecurityStateChanged);
-    this.sendCommand('Security.enable').catch(() => {});
-
-
-    return {
-      promise,
-      cancel,
-    };
-  }
-
-  /**
    * Returns whether the page appears to be hung.
    * @return {Promise<boolean>}
    */
@@ -997,8 +954,6 @@ class Driver {
     // CPU listener. Resolves when the CPU has been idle for cpuQuietThresholdMs after network idle.
     let waitForCPUIdle = this._waitForNothing();
 
-    const monitorForInsecureState = this._monitorForInsecureState();
-
     // Wait for both load promises. Resolves on cleanup function the clears load
     // timeout timer.
     const loadPromise = Promise.all([
@@ -1046,7 +1001,6 @@ class Driver {
     waitForLoadEvent.cancel();
     waitForNetworkIdle.cancel();
     waitForCPUIdle.cancel();
-    monitorForInsecureState.cancel();
 
     await cleanupFn();
   }
