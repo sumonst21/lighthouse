@@ -725,7 +725,7 @@ describe('.gotoURL', () => {
       await loadPromise;
     });
 
-    it('rejects when page is insecure', async () => {
+    it('does not reject when page is insecure', async () => {
       const insecureSecurityState = {
         explanations: [
           {
@@ -758,24 +758,16 @@ describe('.gotoURL', () => {
       };
 
       // 2 assertions in the catch block and the 1 implicit in `findListener`
-      expect.assertions(3);
+      expect.assertions(1);
 
-      try {
-        const loadPromise = driver.gotoURL(startUrl, loadOptions);
-        await flushAllTimersAndMicrotasks();
+      const loadPromise = driver.gotoURL(startUrl, loadOptions);
+      await flushAllTimersAndMicrotasks();
 
-        // Use `findListener` instead of `mockEvent` so we can control exactly when the promise resolves
-        const listener = driver.on.findListener('Security.securityStateChanged');
-        listener(insecureSecurityState);
-        await flushAllTimersAndMicrotasks();
-        await loadPromise;
-      } catch (err) {
-        expect(err).toHaveProperty('code', 'INSECURE_DOCUMENT_REQUEST');
-        expect(err.friendlyMessage).toBeDisplayString(
-          'The URL you have provided does not have a valid security certificate. ' +
-          'reason 1. reason 2.'
-        );
-      }
+      // Use `findListener` instead of `mockEvent` so we can control exactly when the promise resolves
+      const listener = driver.on.findListener('Security.securityStateChanged');
+      listener(insecureSecurityState);
+      await flushAllTimersAndMicrotasks();
+      await loadPromise;
     });
   });
 });

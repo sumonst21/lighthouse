@@ -904,8 +904,7 @@ class Driver {
   }
 
   /**
-   * Return a promise that resolves when an insecure security state is encountered
-   * and a method to cancel internal listeners.
+   * Log a warning if an insecure security state is encountered
    * @return {{promise: Promise<string>, cancel: function(): void}}
    * @private
    */
@@ -915,34 +914,31 @@ class Driver {
       throw new Error('_monitorForInsecureState.cancel() called before it was defined');
     };
 
-    const promise = new Promise((resolve, reject) => {
-      /**
-       * @param {LH.Crdp.Security.SecurityStateChangedEvent} event
-       */
-      const securityStateChangedListener = ({
-        securityState,
-        explanations,
-        schemeIsCryptographic,
-      }) => {
-        if (securityState === 'insecure' && schemeIsCryptographic) {
-          cancel();
-          const insecureDescriptions = explanations
-            .filter(exp => exp.securityState === 'insecure')
-            .map(exp => exp.description);
-          resolve(insecureDescriptions.join(' '));
-        }
-      };
-      let canceled = false;
-      cancel = () => {
-        if (canceled) return;
-        canceled = true;
-        this.off('Security.securityStateChanged', securityStateChangedListener);
-        // TODO(@patrickhulce): cancel() should really be a promise itself to handle things like this
-        this.sendCommand('Security.disable').catch(() => {});
-      };
-      this.on('Security.securityStateChanged', securityStateChangedListener);
-      this.sendCommand('Security.enable').catch(() => {});
-    });
+    // We're only passively monitoring, not changing our waitForFullyLoaded behavior here
+    const promise = new Promise(_ => {});
+    /**
+     * @param {LH.Crdp.Security.SecurityStateChangedEvent} event
+     */
+    const onSecurityStateChanged = ({securityState, explanations, schemeIsCryptographic}) => {
+      if (securityState === 'insecure' && schemeIsCryptographic) {
+        cancel();
+        const insecureDescriptions = explanations
+          .filter(exp => exp.securityState === 'insecure')
+          .map(exp => exp.description);
+        log.warn('Driver', 'insecure security state', insecureDescriptions.join(' '));
+      }
+    };
+    let canceled = false;
+    cancel = () => {
+      if (canceled) return;
+      canceled = true;
+      this.off('Security.securityStateChanged', onSecurityStateChanged);
+      // TODO(@patrickhulce): cancel() should really be a promise itself to handle things like this
+      this.sendCommand('Security.disable').catch(() => {});
+    };
+    this.on('Security.securityStateChanged', onSecurityStateChanged);
+    this.sendCommand('Security.enable').catch(() => {});
+
 
     return {
       promise,
@@ -1002,11 +998,6 @@ class Driver {
     let waitForCPUIdle = this._waitForNothing();
 
     const monitorForInsecureState = this._monitorForInsecureState();
-    const securityCheckPromise = monitorForInsecureState.promise.then(securityMessages => {
-      return function() {
-        throw new LHError(LHError.errors.INSECURE_DOCUMENT_REQUEST, {securityMessages});
-      };
-    });
 
     // Wait for both load promises. Resolves on cleanup function the clears load
     // timeout timer.
@@ -1044,9 +1035,8 @@ class Driver {
       };
     });
 
-    // Wait for security issue, load or timeout and run the cleanup function the winner returns.
+    // Wait for load or timeout and run the cleanup function the winner returns.
     const cleanupFn = await Promise.race([
-      securityCheckPromise,
       loadPromise,
       maxTimeoutPromise,
     ]);
