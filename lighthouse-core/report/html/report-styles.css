@@ -480,7 +480,6 @@
 
 .lh-audit__display-text {
   flex: 1;
-  word-break: normal;
 }
 
 /* Prepend display text with em dash separator. But not in Opportunities. */

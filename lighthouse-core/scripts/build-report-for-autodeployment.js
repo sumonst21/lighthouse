@@ -22,10 +22,6 @@ lhr.categories['lighthouse-plugin-someplugin'] = {
   auditRefs: [],
 };
 
-// Make opprotunities estimated savings longer to test word break behavior.
-// @ts-ignore - details are defined.
-lhr.audits['render-blocking-resources'].details.overallSavingsMs = 12345; // 12.35 s
-
 console.log('🕒 Generating report for sample_v2.json...');
 const html = ReportGenerator.generateReport(lhr, 'html');
 const filename = path.join(__dirname, '../../dist/index.html');
