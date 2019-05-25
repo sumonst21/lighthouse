@@ -212,7 +212,7 @@ function gatherTapTargets() {
   // Capture element positions relative to the top of the page
   window.scrollTo(0, 0);
 
-  /** @type {Element[]} */
+  /** @type {HTMLElement[]} */
   // @ts-ignore - getElementsInDocument put into scope via stringification
   const tapTargetElements = getElementsInDocument(tapTargetsSelector);
 
