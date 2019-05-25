@@ -6,9 +6,16 @@
 'use strict';
 
 const {processForProto} = require('../../lib/proto-preprocessor');
+const sampleJson = require('../results/sample_v2.json');
 
 /* eslint-env jest */
 describe('processing for proto', () => {
+  it('doesn\'t modify the input object', () => {
+    const input = JSON.parse(JSON.stringify(sampleJson));
+    processForProto(input);
+    expect(input).toMatchObject(sampleJson);
+  });
+
   it('keeps only necessary configSettings', () => {
     const input = {
       'configSettings': {
