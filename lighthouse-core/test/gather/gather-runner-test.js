@@ -374,6 +374,8 @@ describe('GatherRunner', function() {
       endTrace: asyncFunc,
       endDevtoolsLog: () => [],
       getBrowserVersion: async () => ({userAgent: ''}),
+      getScrollPosition: async () => 1,
+      scrollTo: async () => {},
     };
     const passConfig = {
       passName: 'default',
@@ -607,7 +609,7 @@ describe('GatherRunner', function() {
       ],
     };
 
-    await GatherRunner.afterPass({url, driver, passConfig}, {TestGatherer: []});
+    await GatherRunner.afterPass({url, driver, passConfig}, {}, {TestGatherer: []});
     // One time for the afterPass of ScrollMcScrolly, two times for the resets of the two gatherers.
     expect(scrollToSpy.mock.calls).toEqual([
       [{x: 1000, y: 1000}],
