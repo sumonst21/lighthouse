@@ -318,6 +318,7 @@ class GatherRunner {
    * @return {Promise<void>}
    */
   static async afterPass(passContext, loadData, gathererResults) {
+    const driver = passContext.driver;
     const config = passContext.passConfig;
     const gatherers = config.gatherers;
 
@@ -326,7 +327,7 @@ class GatherRunner {
 
     // Some gatherers scroll the page which can cause unexpected results for other gatherers.
     // We reset the scroll position in between each gatherer.
-    const scrollPosition = pageLoadError ? null : await driver.getScrollPosition();
+    const scrollPosition = await driver.getScrollPosition();
 
     for (const gathererDefn of gatherers) {
       const gatherer = gathererDefn.instance;
