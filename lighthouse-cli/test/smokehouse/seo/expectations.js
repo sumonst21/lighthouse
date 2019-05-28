@@ -261,6 +261,7 @@ module.exports = [
               {
                 'tapTarget': {
                   'type': 'node',
+                  /* eslint-disable max-len */
                   'snippet': '<a data-gathered-target="zero-width-tap-target-with-overflowing-child-content" style="display: block; width: 0; white-space: nowrap">\n        <!-- TODO: having the span should not be necessary to cause a failure here, but\n             right now we don\'t try to get the client rects of children that …',
                   'path': '2,HTML,1,BODY,14,DIV,0,A',
                   'selector': 'body > div > a',
@@ -268,6 +269,7 @@ module.exports = [
                 },
                 'overlappingTarget': {
                   'type': 'node',
+                  /* eslint-disable max-len */
                   'snippet': '<a data-gathered-target="passing-tap-target-next-to-zero-width-target" style="display: block; width: 100px; height: 100px;background: #aaa;">\n        passing target\n      </a>',
                   'path': '2,HTML,1,BODY,14,DIV,1,A',
                   'selector': 'body > div > a',
