@@ -41,7 +41,7 @@ const i18n = require('./i18n.js');
  */
 
 /**
- * Replaces all strings within an LHR with ones from a different locale
+ * Returns a new LHR with all strings changed to the new `requestedLocale`.
  * @param {LH.Result} lhr
  * @param {LH.Locale} requestedLocale
  * @return {LH.Result}
