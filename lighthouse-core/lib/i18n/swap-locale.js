@@ -47,7 +47,7 @@ const i18n = require('./i18n.js');
  * @return {LH.Result}
  */
 function swapLocale(lhr, requestedLocale) {
-  // copy LHR to avoid mutating provided LHR
+  // Copy LHR to avoid mutating provided LHR.
   lhr = JSON.parse(JSON.stringify(lhr));
 
   const locale = i18n.lookupLocale(requestedLocale);
