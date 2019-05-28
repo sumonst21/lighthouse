@@ -52,6 +52,7 @@ function swapLocale(lhr, requestedLocale) {
 
   const locale = i18n.lookupLocale(requestedLocale);
   const {icuMessagePaths} = lhr.i18n;
+  const missingIcuMessageIds = /** @type {string[]} */([]);
 
   Object.entries(icuMessagePaths).forEach(([icuMessageId, messageInstancesInLHR]) => {
     for (const instance of messageInstancesInLHR) {
@@ -73,13 +74,17 @@ function swapLocale(lhr, requestedLocale) {
         _set(lhr, path, formattedStr);
       } catch (err) {
         if (err.message === 'No ICU message string to format') {
-          console.error('No message found for ', {locale, icuMessageId});
+          missingIcuMessageIds.push(icuMessageId);
         } else {
           throw err;
         }
       }
     }
   });
+
+  if (missingIcuMessageIds.length) {
+    console.error(`No message in locale (${locale}) found for:\n`, missingIcuMessageIds);
+  }
 
   lhr.i18n.rendererFormattedStrings = i18n.getRendererFormattedStrings(locale);
   // Tweak the config locale

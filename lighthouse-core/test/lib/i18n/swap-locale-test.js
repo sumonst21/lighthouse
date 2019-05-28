@@ -10,6 +10,11 @@ const swapLocale = require('../../../lib/i18n/swap-locale.js');
 const lhr = require('../../results/sample_v2.json');
 
 /* eslint-env jest */
+beforeEach(() => {
+  // silence console.error spam about messages not found
+  // eslint-disable-next-line no-console
+  console.error = jest.fn();
+});
 
 describe('swap-locale', () => {
   it('can change golden LHR english strings into spanish', () => {
