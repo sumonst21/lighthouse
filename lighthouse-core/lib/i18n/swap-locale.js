@@ -62,9 +62,9 @@ function swapLocale(lhr, requestedLocale) {
       if (typeof instance === 'string') {
         path = instance;
       } else {
-        path = /** @type {LH.I18NMessageValuesEntry} */ (instance).path;
+        path = instance.path;
         // `values` are the string template values to be used. eg. `values: {wastedBytes: 9028}`
-        values = /** @type {LH.I18NMessageValuesEntry} */ (instance).values;
+        values = instance.values;
       }
       // If we couldn't find the new replacement message, keep things as is.
       try {
