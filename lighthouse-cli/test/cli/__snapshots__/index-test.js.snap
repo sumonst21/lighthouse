@@ -70,6 +70,9 @@ Object {
       "path": "installable-manifest",
     },
     Object {
+      "path": "apple-touch-icon",
+    },
+    Object {
       "path": "splash-screen",
     },
     Object {
@@ -119,6 +122,9 @@ Object {
     },
     Object {
       "path": "offline-start-url",
+    },
+    Object {
+      "path": "performance-budget",
     },
     Object {
       "path": "resource-summary",
@@ -815,6 +821,11 @@ Object {
           "weight": 0,
         },
         Object {
+          "group": "budgets",
+          "id": "performance-budget",
+          "weight": 0,
+        },
+        Object {
           "group": "diagnostics",
           "id": "resource-summary",
           "weight": 0,
@@ -914,6 +925,11 @@ Object {
         Object {
           "group": "pwa-optimized",
           "id": "without-javascript",
+          "weight": 1,
+        },
+        Object {
+          "group": "pwa-optimized",
+          "id": "apple-touch-icon",
           "weight": 1,
         },
         Object {
@@ -1042,6 +1058,10 @@ Object {
     "a11y-tables-lists": Object {
       "description": "These are opportunities to to improve the experience of reading tabular or list data using assistive technology, like a screen reader.",
       "title": "Tables and lists",
+    },
+    "budgets": Object {
+      "description": "Performance budgets set standards for the performance of your site.",
+      "title": "Budgets",
     },
     "diagnostics": Object {
       "description": "More information about the performance of your application.",
@@ -1285,6 +1305,10 @@ Object {
     "a11y-tables-lists": Object {
       "description": "These are opportunities to to improve the experience of reading tabular or list data using assistive technology, like a screen reader.",
       "title": "Tables and lists",
+    },
+    "budgets": Object {
+      "description": "Performance budgets set standards for the performance of your site.",
+      "title": "Budgets",
     },
     "diagnostics": Object {
       "description": "More information about the performance of your application.",

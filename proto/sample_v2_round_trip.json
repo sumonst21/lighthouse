@@ -2,14 +2,9 @@
     "audits": {
         "accesskeys": {
             "description": "Access keys let users quickly focus a part of the page. For proper navigation, each access key must be unique. [Learn more](https://dequeuniversity.com/rules/axe/3.1/accesskeys?application=lighthouse).",
-            "details": {
-                "headings": [],
-                "items": [],
-                "type": "table"
-            },
             "id": "accesskeys",
-            "score": 1.0,
-            "scoreDisplayMode": "binary",
+            "score": null,
+            "scoreDisplayMode": "notApplicable",
             "title": "`[accesskey]` values are unique"
         },
         "appcache-manifest": {
@@ -19,6 +14,14 @@
             "score": 0.0,
             "scoreDisplayMode": "binary",
             "title": "Uses Application Cache"
+        },
+        "apple-touch-icon": {
+            "description": "For ideal appearance on iOS when users add to the home screen, define an apple-touch-icon. It must point to a non-transparent 192px (or 180px) square PNG. [Learn More](https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/).",
+            "id": "apple-touch-icon",
+            "score": 0.0,
+            "scoreDisplayMode": "binary",
+            "title": "Does not provide a valid `apple-touch-icon`",
+            "warnings": []
         },
         "aria-allowed-attr": {
             "description": "Each ARIA `role` supports a specific subset of `aria-*` attributes. Mismatching these invalidates the `aria-*` attributes. [Learn more](https://dequeuniversity.com/rules/axe/3.1/aria-allowed-attr?application=lighthouse).",
@@ -144,9 +147,14 @@
         },
         "button-name": {
             "description": "When a button doesn't have an accessible name, screen readers announce it as \"button\", making it unusable for users who rely on screen readers. [Learn more](https://dequeuniversity.com/rules/axe/3.1/button-name?application=lighthouse).",
+            "details": {
+                "headings": [],
+                "items": [],
+                "type": "table"
+            },
             "id": "button-name",
-            "score": null,
-            "scoreDisplayMode": "notApplicable",
+            "score": 1.0,
+            "scoreDisplayMode": "binary",
             "title": "Buttons have an accessible name"
         },
         "bypass": {
@@ -191,6 +199,7 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 1.32 (foreground color: #ffc0cb, background color: #eeeeee, font size: 18.0pt, font weight: bold). Expected contrast ratio of 3:1",
+                            "nodeLabel": "Do better web tester page",
                             "path": "3,HTML,1,BODY,5,DIV,0,H2",
                             "selector": "h2",
                             "snippet": "<h2>Do better web tester page</h2>",
@@ -200,6 +209,7 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 1.32 (foreground color: #ffc0cb, background color: #eeeeee, font size: 12.0pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                            "nodeLabel": "Hi there!",
                             "path": "3,HTML,1,BODY,5,DIV,1,SPAN",
                             "selector": "span",
                             "snippet": "<span>Hi there!</span>",
@@ -863,6 +873,7 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  The <html> element does not have a lang attribute",
+                            "nodeLabel": "html",
                             "path": "3,HTML",
                             "selector": "html",
                             "snippet": "<html manifest=\"clock.appcache\">",
@@ -916,6 +927,7 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
+                            "nodeLabel": "img",
                             "path": "3,HTML,1,BODY,10,IMG",
                             "selector": "img[height=\"\\35 7\"]",
                             "snippet": "<img src=\"lighthouse-480x318.jpg\" width=\"480\" height=\"57\">",
@@ -925,6 +937,7 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
+                            "nodeLabel": "img",
                             "path": "3,HTML,1,BODY,12,IMG",
                             "selector": "img[height=\"\\33 18\"]",
                             "snippet": "<img src=\"lighthouse-480x318.jpg\" width=\"480\" height=\"318\">",
@@ -934,8 +947,9 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
+                            "nodeLabel": "img",
                             "path": "3,HTML,1,BODY,14,IMG",
-                            "selector": "img[src$=\"lighthouse-rotating.gif\"]",
+                            "selector": "img[src$=\"lighthouse-rotating\\.gif\"]",
                             "snippet": "<img src=\"lighthouse-rotating.gif\" width=\"811\" height=\"462\">",
                             "type": "node"
                         }
@@ -943,8 +957,9 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
-                            "path": "3,HTML,1,BODY,49,IMG",
-                            "selector": "img:nth-child(27)",
+                            "nodeLabel": "img",
+                            "path": "3,HTML,1,BODY,53,IMG",
+                            "selector": "img:nth-child(30)",
                             "snippet": "<img src=\"blob:http://localhost:62824/289254fd-ef1d-4c1a-96a8-ba291caa2140\">",
                             "type": "node"
                         }
@@ -1100,7 +1115,7 @@
                         "name": "WordPress"
                     }
                 ],
-                "summary": null,
+                "summary": {},
                 "type": "table"
             },
             "id": "js-libraries",
@@ -1134,7 +1149,8 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  Element has no title attribute or the title attribute is empty",
-                            "path": "3,HTML,1,BODY,44,INPUT",
+                            "nodeLabel": "input",
+                            "path": "3,HTML,1,BODY,48,INPUT",
                             "selector": "input[onpaste=\"event\\.preventDefault\\(\\)\\;\"]",
                             "snippet": "<input type=\"password\" onpaste=\"event.preventDefault();\">",
                             "type": "node"
@@ -1143,8 +1159,9 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  Element has no title attribute or the title attribute is empty",
-                            "path": "3,HTML,1,BODY,46,INPUT",
-                            "selector": "input:nth-child(25)",
+                            "nodeLabel": "input",
+                            "path": "3,HTML,1,BODY,50,INPUT",
+                            "selector": "input:nth-child(28)",
                             "snippet": "<input type=\"password\">",
                             "type": "node"
                         }
@@ -1152,7 +1169,8 @@
                     {
                         "node": {
                             "explanation": "Fix any of the following:\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  Element has no title attribute or the title attribute is empty",
-                            "path": "3,HTML,1,BODY,48,INPUT",
+                            "nodeLabel": "input",
+                            "path": "3,HTML,1,BODY,52,INPUT",
                             "selector": "input[onpaste=\"return\\ false\\;\"]",
                             "snippet": "<input type=\"password\" onpaste=\"return false;\">",
                             "type": "node"
@@ -1199,8 +1217,9 @@
                     {
                         "node": {
                             "explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
-                            "path": "3,HTML,1,BODY,40,A",
-                            "selector": "a[href=\"javascript:void(0)\"]",
+                            "nodeLabel": "a",
+                            "path": "3,HTML,1,BODY,44,A",
+                            "selector": "a[href=\"javascript\\:void\\(0\\)\"]",
                             "snippet": "<a href=\"javascript:void(0)\" target=\"_blank\"></a>",
                             "type": "node"
                         }
@@ -1208,8 +1227,9 @@
                     {
                         "node": {
                             "explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
-                            "path": "3,HTML,1,BODY,42,A",
-                            "selector": "a[href$=\"mailto:inbox@email.com\"]",
+                            "nodeLabel": "a",
+                            "path": "3,HTML,1,BODY,46,A",
+                            "selector": "a[href$=\"mailto\\:inbox\\@email\\.com\"]",
                             "snippet": "<a href=\"mailto:inbox@email.com\" target=\"_blank\"></a>",
                             "type": "node"
                         }
@@ -1227,7 +1247,7 @@
             "details": {
                 "headings": [],
                 "items": [],
-                "summary": null,
+                "summary": {},
                 "type": "table"
             },
             "id": "link-text",
@@ -1883,7 +1903,7 @@
                         "vulnCount": 2.0
                     }
                 ],
-                "summary": null,
+                "summary": {},
                 "type": "table"
             },
             "displayValue": "2 vulnerabilities detected",
@@ -1944,7 +1964,8 @@
                 "items": [
                     {
                         "node": {
-                            "explanation": "Fix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty",
+                            "explanation": "Fix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
+                            "nodeLabel": "object",
                             "path": "3,HTML,1,BODY,2,OBJECT",
                             "selector": "#\\35 934a",
                             "snippet": "<object id=\"5934a\"></object>",
@@ -1953,7 +1974,8 @@
                     },
                     {
                         "node": {
-                            "explanation": "Fix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty",
+                            "explanation": "Fix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"",
+                            "nodeLabel": "object",
                             "path": "3,HTML,1,BODY,3,OBJECT",
                             "selector": "#\\35 934b",
                             "snippet": "<object id=\"5934b\"></object>",
@@ -2030,6 +2052,108 @@
             "score": 0.0,
             "scoreDisplayMode": "binary",
             "title": "Prevents users to paste into password fields"
+        },
+        "performance-budget": {
+            "description": "Keep the quantity and size of network requests under the targets set by the provided performance budget. [Learn more](https://developers.google.com/web/tools/lighthouse/audits/budgets).",
+            "details": {
+                "headings": [
+                    {
+                        "itemType": "text",
+                        "key": "label",
+                        "text": "Resource Type"
+                    },
+                    {
+                        "itemType": "numeric",
+                        "key": "requestCount",
+                        "text": "Requests"
+                    },
+                    {
+                        "itemType": "bytes",
+                        "key": "size",
+                        "text": "Transfer Size"
+                    },
+                    {
+                        "itemType": "text",
+                        "key": "countOverBudget"
+                    },
+                    {
+                        "itemType": "bytes",
+                        "key": "sizeOverBudget",
+                        "text": "Over Budget"
+                    }
+                ],
+                "items": [
+                    {
+                        "countOverBudget": "2 requests",
+                        "label": "Script",
+                        "requestCount": 4.0,
+                        "resourceType": "script",
+                        "size": 103675.0,
+                        "sizeOverBudget": 72955.0
+                    },
+                    {
+                        "countOverBudget": "8 requests",
+                        "label": "Total",
+                        "requestCount": 18.0,
+                        "resourceType": "total",
+                        "size": 160738.0,
+                        "sizeOverBudget": 58338.0
+                    },
+                    {
+                        "label": "Other",
+                        "requestCount": 2.0,
+                        "resourceType": "other",
+                        "size": 12861.0,
+                        "sizeOverBudget": 7741.0
+                    },
+                    {
+                        "countOverBudget": "1 request",
+                        "label": "Third-party",
+                        "requestCount": 2.0,
+                        "resourceType": "third-party",
+                        "size": 30174.0,
+                        "sizeOverBudget": 4574.0
+                    },
+                    {
+                        "countOverBudget": "5 requests",
+                        "label": "Stylesheet",
+                        "requestCount": 7.0,
+                        "resourceType": "stylesheet",
+                        "size": 5352.0,
+                        "sizeOverBudget": 232.0
+                    },
+                    {
+                        "label": "Image",
+                        "requestCount": 2.0,
+                        "resourceType": "image",
+                        "size": 24741.0
+                    },
+                    {
+                        "label": "Media",
+                        "requestCount": 0.0,
+                        "resourceType": "media",
+                        "size": 0.0
+                    },
+                    {
+                        "label": "Font",
+                        "requestCount": 0.0,
+                        "resourceType": "font",
+                        "size": 0.0
+                    },
+                    {
+                        "countOverBudget": "2 requests",
+                        "label": "Document",
+                        "requestCount": 3.0,
+                        "resourceType": "document",
+                        "size": 14109.0
+                    }
+                ],
+                "type": "table"
+            },
+            "id": "performance-budget",
+            "score": null,
+            "scoreDisplayMode": "informative",
+            "title": "Performance budget"
         },
         "plugins": {
             "description": "Search engines can't index plugin content, and many devices restrict plugins or don't support them. [Learn more](https://developers.google.com/web/tools/lighthouse/audits/plugins).",
@@ -2143,7 +2267,7 @@
             "title": "Eliminate render-blocking resources"
         },
         "resource-summary": {
-            "description": "To set budgets for the quantity and size of page resources, add a budget.json file.",
+            "description": "To set budgets for the quantity and size of page resources, add a budget.json file. [Learn more](https://developers.google.com/web/tools/lighthouse/audits/budgets).",
             "details": {
                 "headings": [
                     {
@@ -2349,15 +2473,54 @@
         "tap-targets": {
             "description": "Interactive elements like buttons and links should be large enough (48x48px), and have enough space around them, to be easy enough to tap without overlapping onto other elements. [Learn more](https://developers.google.com/web/fundamentals/accessibility/accessible-styles#multi-device_responsive_design).",
             "details": {
-                "headings": [],
-                "items": [],
+                "headings": [
+                    {
+                        "itemType": "node",
+                        "key": "tapTarget",
+                        "text": "Tap Target"
+                    },
+                    {
+                        "itemType": "text",
+                        "key": "size",
+                        "text": "Size"
+                    },
+                    {
+                        "itemType": "node",
+                        "key": "overlappingTarget",
+                        "text": "Overlapping Target"
+                    }
+                ],
+                "items": [
+                    {
+                        "height": 18.0,
+                        "overlapScoreRatio": 0.8333333333333334,
+                        "overlappingTarget": {
+                            "nodeLabel": "Do something else",
+                            "path": "3,HTML,1,BODY,18,BUTTON",
+                            "selector": "body > button.small-button",
+                            "snippet": "<button class=\"small-button\">Do something else</button>",
+                            "type": "node"
+                        },
+                        "overlappingTargetScore": 720.0,
+                        "size": "200x18",
+                        "tapTarget": {
+                            "nodeLabel": "Do something",
+                            "path": "3,HTML,1,BODY,17,BUTTON",
+                            "selector": "body > button.small-button",
+                            "snippet": "<button class=\"small-button\">Do something</button>",
+                            "type": "node"
+                        },
+                        "tapTargetScore": 864.0,
+                        "width": 200.0
+                    }
+                ],
                 "type": "table"
             },
-            "displayValue": "100% appropriately sized tap targets",
+            "displayValue": "0% appropriately sized tap targets",
             "id": "tap-targets",
-            "score": 1.0,
+            "score": 0.0,
             "scoreDisplayMode": "binary",
-            "title": "Tap targets are sized appropriately"
+            "title": "Tap targets are not sized appropriately"
         },
         "td-headers-attr": {
             "description": "Screen readers have features to make navigating tables easier. Ensuring `<td>` cells using the `[headers]` attribute only refer to other cells in the same table may improve the experience for screen reader users. [Learn more](https://dequeuniversity.com/rules/axe/3.1/td-headers-attr?application=lighthouse).",
@@ -3000,7 +3163,7 @@
                 {
                     "group": "a11y-navigation",
                     "id": "accesskeys",
-                    "weight": 3.0
+                    "weight": 0.0
                 },
                 {
                     "group": "a11y-aria",
@@ -3045,7 +3208,7 @@
                 {
                     "group": "a11y-names-labels",
                     "id": "button-name",
-                    "weight": 0.0
+                    "weight": 10.0
                 },
                 {
                     "group": "a11y-navigation",
@@ -3220,7 +3383,7 @@
             "description": "These checks highlight opportunities to [improve the accessibility of your web app](https://developers.google.com/web/fundamentals/accessibility). Only a subset of accessibility issues can be automatically detected so manual testing is also encouraged.",
             "id": "accessibility",
             "manualDescription": "These items address areas which an automated testing tool cannot cover. Learn more in our guide on [conducting an accessibility review](https://developers.google.com/web/fundamentals/accessibility/how-to-review).",
-            "score": 0.38,
+            "score": 0.46,
             "title": "Accessibility"
         },
         "best-practices": {
@@ -3437,6 +3600,11 @@
                     "weight": 0.0
                 },
                 {
+                    "group": "budgets",
+                    "id": "performance-budget",
+                    "weight": 0.0
+                },
+                {
                     "group": "diagnostics",
                     "id": "resource-summary",
                     "weight": 0.0
@@ -3541,6 +3709,11 @@
                     "weight": 1.0
                 },
                 {
+                    "group": "pwa-optimized",
+                    "id": "apple-touch-icon",
+                    "weight": 1.0
+                },
+                {
                     "id": "pwa-cross-browser",
                     "weight": 0.0
                 },
@@ -3556,7 +3729,7 @@
             "description": "These checks validate the aspects of a Progressive Web App. [Learn more](https://developers.google.com/web/progressive-web-apps/checklist).",
             "id": "pwa",
             "manualDescription": "These checks are required by the baseline [PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are not automatically checked by Lighthouse. They do not affect your score but it's important that you verify them manually.",
-            "score": 0.42,
+            "score": 0.41,
             "title": "Progressive Web App"
         },
         "seo": {
@@ -3634,7 +3807,7 @@
             "description": "These checks ensure that your page is optimized for search engine results ranking. There are additional factors Lighthouse does not check that may affect your search ranking. [Learn more](https://support.google.com/webmasters/answer/35769).",
             "id": "seo",
             "manualDescription": "Run these additional validators on your site to check additional SEO best practices.",
-            "score": 0.82,
+            "score": 0.73,
             "title": "SEO"
         }
     },
@@ -3670,6 +3843,10 @@
         "a11y-tables-lists": {
             "description": "These are opportunities to to improve the experience of reading tabular or list data using assistive technology, like a screen reader.",
             "title": "Tables and lists"
+        },
+        "budgets": {
+            "description": "Performance budgets set standards for the performance of your site.",
+            "title": "Budgets"
         },
         "diagnostics": {
             "description": "More information about the performance of your application.",
@@ -3739,7 +3916,7 @@
             "warningHeader": "Warnings: "
         }
     },
-    "lighthouseVersion": "4.3.0",
+    "lighthouseVersion": "5.0.0",
     "requestedUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
     "runWarnings": [],
     "stackPacks": [
@@ -4064,6 +4241,12 @@
             {
                 "duration": 100.0,
                 "entryType": "measure",
+                "name": "lh:audit:apple-touch-icon",
+                "startTime": 0.0
+            },
+            {
+                "duration": 100.0,
+                "entryType": "measure",
                 "name": "lh:audit:splash-screen",
                 "startTime": 0.0
             },
@@ -4178,13 +4361,19 @@
             {
                 "duration": 100.0,
                 "entryType": "measure",
-                "name": "lh:audit:resource-summary",
+                "name": "lh:audit:performance-budget",
                 "startTime": 0.0
             },
             {
                 "duration": 100.0,
                 "entryType": "measure",
                 "name": "lh:computed:ResourceSummary",
+                "startTime": 0.0
+            },
+            {
+                "duration": 100.0,
+                "entryType": "measure",
+                "name": "lh:audit:resource-summary",
                 "startTime": 0.0
             },
             {

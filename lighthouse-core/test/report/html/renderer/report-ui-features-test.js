@@ -108,6 +108,15 @@ describe('ReportUIFeatures', () => {
       assert.equal(dom.findAll('.lh-category', container).length, 5);
     });
 
+    it('should init a report with a single category', () => {
+      const lhr = JSON.parse(JSON.stringify(sampleResults));
+      lhr.categories = {
+        performance: lhr.categories.performance,
+      };
+      const container = render(lhr);
+      assert.equal(dom.findAll('.lh-category', container).length, 1);
+    });
+
     describe('third-party filtering', () => {
       let container;
 
@@ -115,6 +124,10 @@ describe('ReportUIFeatures', () => {
         const lhr = JSON.parse(JSON.stringify(sampleResults));
         lhr.requestedUrl = lhr.finalUrl = 'http://www.example.com';
         const webpAuditItemTemplate = sampleResults.audits['uses-webp-images'].details.items[0];
+        const renderBlockingAuditItemTemplate =
+          sampleResults.audits['render-blocking-resources'].details.items[0];
+        const textCompressionAuditItemTemplate =
+          sampleResults.audits['uses-text-compression'].details.items[0];
         // Interleave first/third party URLs to test restoring order.
         lhr.audits['uses-webp-images'].details.items = [
           {
@@ -128,6 +141,38 @@ describe('ReportUIFeatures', () => {
           {
             ...webpAuditItemTemplate,
             url: 'http://www.notexample.com/img3.jpg', // Third party, will be filtered.
+          },
+        ];
+
+        // Only third party URLs to test that checkbox is hidden
+        lhr.audits['render-blocking-resources'].details.items = [
+          {
+            ...renderBlockingAuditItemTemplate,
+            url: 'http://www.cdn.com/script1.js', // Third party.
+          },
+          {
+            ...renderBlockingAuditItemTemplate,
+            url: 'http://www.google.com/script2.js', // Third party.
+          },
+          {
+            ...renderBlockingAuditItemTemplate,
+            url: 'http://www.notexample.com/script3.js', // Third party.
+          },
+        ];
+
+        // Only first party URLs to test that checkbox is hidden
+        lhr.audits['uses-text-compression'].details.items = [
+          {
+            ...textCompressionAuditItemTemplate,
+            url: 'http://www.example.com/font1.ttf', // First party.
+          },
+          {
+            ...textCompressionAuditItemTemplate,
+            url: 'http://www.example.com/font2.ttf', // First party.
+          },
+          {
+            ...textCompressionAuditItemTemplate,
+            url: 'http://www.example.com/font3.ttf', // First party.
           },
         ];
 
@@ -151,7 +196,7 @@ describe('ReportUIFeatures', () => {
         expect(getUrlsInTable()).toEqual(['/img1.jpg', '/img2.jpg', '/img3.jpg']);
       });
 
-      it('adds no filter for audits that do not need them', () => {
+      it('adds no filter for audits in thirdPartyFilterAuditExclusions', () => {
         const checkboxClassName = 'lh-3p-filter-input';
 
         const yesCheckbox = dom.find(`#uses-webp-images .${checkboxClassName}`, container);
@@ -160,43 +205,38 @@ describe('ReportUIFeatures', () => {
         expect(() => dom.find(`#uses-rel-preconnect .${checkboxClassName}`, container))
           .toThrowError('query #uses-rel-preconnect .lh-3p-filter-input not found');
       });
+
+      it('adds no filter for audits with tables containing only third party resources', () => {
+        const checkboxClassName = 'lh-3p-filter-input';
+
+        expect(() => dom.find(`#render-blocking-resources .${checkboxClassName}`, container))
+          .toThrowError('query #render-blocking-resources .lh-3p-filter-input not found');
+      });
+
+      it('adds no filter for audits with tables containing only first party resources', () => {
+        const checkboxClassName = 'lh-3p-filter-input';
+
+        expect(() => dom.find(`#uses-text-compression .${checkboxClassName}`, container))
+          .toThrowError('query #uses-text-compression .lh-3p-filter-input not found');
+      });
     });
   });
 
-  describe('metric description toggles', () => {
-    let container;
-    let metricsAuditGroup;
-    let toggle;
-    const metricsClass = 'lh-audit-group--metrics';
-    const toggleClass = 'lh-metrics-toggle__input';
-    const showClass = 'lh-audit-group--metrics__show-descriptions';
-
-    describe('works if there is a performance category', () => {
-      beforeAll(() => {
-        container = render(sampleResults);
-        metricsAuditGroup = dom.find(`.${metricsClass}`, container);
-        toggle = dom.find(`.${toggleClass}`, metricsAuditGroup);
-      });
-
-      it('descriptions hidden by default', () => {
-        assert.ok(!metricsAuditGroup.classList.contains(showClass));
-      });
-
-      it('can toggle description visibility', () => {
-        assert.ok(!metricsAuditGroup.classList.contains(showClass));
-        toggle.click();
-        assert.ok(metricsAuditGroup.classList.contains(showClass));
-        toggle.click();
-        assert.ok(!metricsAuditGroup.classList.contains(showClass));
-      });
+  describe('fireworks', () => {
+    it('should render an non-all 100 report without fireworks', () => {
+      const lhr = JSON.parse(JSON.stringify(sampleResults));
+      lhr.categories.performance.score = 0.5;
+      const container = render(lhr);
+      assert.ok(container.querySelector('.score100') === null, 'has no fireworks treatment');
     });
 
-    it('report still works if performance category does not run', () => {
+    it('should render an all 100 report with fireworks', () => {
       const lhr = JSON.parse(JSON.stringify(sampleResults));
-      delete lhr.categories.performance;
-      container = render(lhr);
-      assert.ok(!container.querySelector(`.${metricsClass}`));
-      assert.ok(!container.querySelector(`.${toggleClass}`));
+      Object.values(lhr.categories).forEach(element => {
+        element.score = 1;
+      });
+      const container = render(lhr);
+      assert.ok(container.querySelector('.score100'), 'has fireworks treatment');
     });
   });
 });
