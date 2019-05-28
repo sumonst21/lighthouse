@@ -20,24 +20,24 @@ const i18n = require('./i18n.js');
  *    which will be used in the replacement within `i18n._formatIcuMessage()`
  *
  * An example:
- *    "icuMessagePaths": {
-      "lighthouse-core/audits/metrics/first-contentful-paint.js | title": [
-        "audits[first-contentful-paint].title"
-      ],
-      "lighthouse-core/audits/time-to-first-byte.js | displayValue": [
-        {
-          "values": {
-            "timeInMs": 570.5630000000001
-          },
-          "path": "audits[time-to-first-byte].displayValue"
-        }
-      ],
-      "lighthouse-core/lib/i18n/i18n.js | columnTimeSpent": [
-        "audits[mainthread-work-breakdown].details.headings[1].text",
-        "audits[network-rtt].details.headings[1].text",
-        "audits[network-server-latency].details.headings[1].text"
-      ],
-      ...
+    "icuMessagePaths": {
+    "lighthouse-core/audits/metrics/first-contentful-paint.js | title": [
+      "audits[first-contentful-paint].title"
+    ],
+    "lighthouse-core/audits/time-to-first-byte.js | displayValue": [
+      {
+        "values": {
+          "timeInMs": 570.5630000000001
+        },
+        "path": "audits[time-to-first-byte].displayValue"
+      }
+    ],
+    "lighthouse-core/lib/i18n/i18n.js | columnTimeSpent": [
+      "audits[mainthread-work-breakdown].details.headings[1].text",
+      "audits[network-rtt].details.headings[1].text",
+      "audits[network-server-latency].details.headings[1].text"
+    ],
+    ...
  */
 
 /**
@@ -68,10 +68,16 @@ function swapLocale(lhr, requestedLocale) {
       // If we couldn't find the new replacement message, keep things as is.
       try {
         // Get new formatted strings in revised locale
-        const formattedStr = i18n.formatMessageFromIdWithValues(locale, icuMessageId, values);
+        const formattedStr = i18n.getFormattedFromIdAndValues(locale, icuMessageId, values);
         // Write string back into the LHR
         _set(lhr, path, formattedStr);
-      } catch (e) {}
+      } catch (err) {
+        if (err.message === 'No ICU message string to format') {
+          console.error('No message found for ', {locale, icuMessageId});
+        } else {
+          throw err;
+        }
+      }
     }
   });
 

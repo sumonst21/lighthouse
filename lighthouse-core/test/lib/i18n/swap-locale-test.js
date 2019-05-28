@@ -14,7 +14,6 @@ const lhr = require('../../results/sample_v2.json');
 describe('swap-locale', () => {
   it('can change golden LHR english strings into spanish', () => {
     const lhrEn = /** @type {LH.Result} */ (JSON.parse(JSON.stringify(lhr)));
-
     const lhrEs = swapLocale(lhrEn, 'es');
 
     // Basic replacement
@@ -25,9 +24,20 @@ describe('swap-locale', () => {
     expect(lhrEn.audits['dom-size'].displayValue).toEqual('31 elements');
     expect(lhrEs.audits['dom-size'].displayValue).toEqual('31 elementos');
 
-    /* eslint-disable max-len */
     // Renderer formatted strings
-    expect(lhrEn.i18n.rendererFormattedStrings.notApplicableAuditsGroupTitle).toEqual('Not applicable');
-    expect(lhrEs.i18n.rendererFormattedStrings.notApplicableAuditsGroupTitle).toEqual('No aplicable');
+    expect(lhrEn.i18n.rendererFormattedStrings.labDataTitle).toEqual('Lab Data');
+    expect(lhrEs.i18n.rendererFormattedStrings.labDataTitle).toEqual('Datos de prueba');
+  });
+
+  it('can roundtrip back to english correctly', () => {
+    const lhrEn = /** @type {LH.Result} */ (JSON.parse(JSON.stringify(lhr)));
+
+    // via Spanish
+    const lhrEnEsRT = swapLocale(swapLocale(lhrEn, 'es'), 'en-US');
+    expect(lhrEnEsRT).toMatchObject(lhrEn);
+
+    // via Arabic
+    const lhrEnArRT = swapLocale(swapLocale(lhrEn, 'ar'), 'en-US');
+    expect(lhrEnArRT).toMatchObject(lhrEn);
   });
 });
