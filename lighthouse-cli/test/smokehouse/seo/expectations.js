@@ -270,7 +270,7 @@ module.exports = [
                 'overlappingTarget': {
                   'type': 'node',
                   /* eslint-disable max-len */
-                  'snippet': '<a data-gathered-target="passing-tap-target-next-to-zero-width-target" style="display: block; width: 100px; height: 100px;background: #aaa;">\n        passing target\n      </a>',
+                  'snippet': '<a data-gathered-target="passing-tap-target-next-to-zero-width-target" style="display: block; width: 110px; height: 100px;background: #aaa;">\n        passing target\n      </a>',
                   'path': '2,HTML,1,BODY,14,DIV,1,A',
                   'selector': 'body > div > a',
                   'nodeLabel': 'passing target',
@@ -278,8 +278,8 @@ module.exports = [
                 'tapTargetScore': 864,
                 'overlappingTargetScore': 720,
                 'overlapScoreRatio': 0.8333333333333334,
-                'size': '108x18',
-                'width': 108,
+                'size': '110x18',
+                'width': 110,
                 'height': 18,
               },
               {
