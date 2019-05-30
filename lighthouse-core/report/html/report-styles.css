@@ -293,7 +293,7 @@
   height: calc(100% - var(--topbar-height));
 }
 .lh-devtools .lh-sticky-header {
-  /* Is normally the height of the topbar. */
+  /* This is normally the height of the topbar, but we want it to stick to the top of our scroll container .lh-container` */
   top: 0;
 }
 
