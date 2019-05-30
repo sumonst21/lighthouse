@@ -200,7 +200,7 @@ class ReportRenderer {
     const headerContainer = this._dom.createElement('div');
     headerContainer.appendChild(this._renderReportHeader());
 
-    const container = this._dom.createElement('div', 'lh-container');
+    const reportContainer = this._dom.createElement('div', 'lh-container');
     const reportSection = this._dom.createElement('div', 'lh-report');
     reportSection.appendChild(this._renderReportWarnings(report));
 
@@ -223,7 +223,7 @@ class ReportRenderer {
       const stickyHeader = this._dom.createElement('div', 'lh-sticky-header');
       stickyHeader.append(
         ...this._renderScoreGauges(report, categoryRenderer, specificCategoryRenderers));
-      container.appendChild(stickyHeader);
+      reportContainer.appendChild(stickyHeader);
     }
 
     const categories = reportSection.appendChild(this._dom.createElement('div', 'lh-categories'));
@@ -239,9 +239,9 @@ class ReportRenderer {
     const topbarDocumentFragment = this._renderReportTopbar(report);
 
     reportFragment.appendChild(topbarDocumentFragment);
-    reportFragment.appendChild(container);
-    container.appendChild(headerContainer);
-    container.appendChild(reportSection);
+    reportFragment.appendChild(reportContainer);
+    reportContainer.appendChild(headerContainer);
+    reportContainer.appendChild(reportSection);
     reportSection.appendChild(this._renderReportFooter(report));
 
     return reportFragment;
