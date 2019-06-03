@@ -62,8 +62,16 @@ function getFlags(manualArgv) {
           'lighthouse <url> --only-categories=performance,pwa',
           'Only run specific categories.')
 
-      // Accept a file for all of these flags.
-      .config('cli-settings-path')
+      /**
+       * Also accept a file for all of these flags. Yargs will merge in and override the file-based
+       * flags with the command-line flags.
+       *
+       * i.e. when command-line `--throttling-method=provided` and file `throttlingMethod: "devtools"`,
+       * throttlingMethod will be `provided`.
+       *
+       * @see https://github.com/yargs/yargs/blob/a6e67f15a61558d0ba28bfe53385332f0ce5d431/docs/api.md#config
+       */
+      .config('cli-flags-path')
 
       // List of options
       .group(['verbose', 'quiet'], 'Logging:')

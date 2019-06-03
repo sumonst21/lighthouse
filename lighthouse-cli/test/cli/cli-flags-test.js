@@ -32,10 +32,12 @@ describe('CLI bin', function() {
   it('settings are accepted from a file path', () => {
     const flags = getFlags([
       'http://www.example.com',
-      `--cli-settings-path="${__dirname}/../fixtures/cli-settings-path.json"`,
+      `--cli-flags-path="${__dirname}/../fixtures/cli-flags-path.json"`,
+      '--budgets-path=path/to/my/budget-from-command-line.json', // this should override the config value
     ].join(' '));
 
     expect(flags).toMatchObject({
+      budgetsPath: 'path/to/my/budget-from-command-line.json',
       onlyCategories: ['performance', 'seo'],
       chromeFlags: '--window-size 800,600',
       throttlingMethod: 'devtools',

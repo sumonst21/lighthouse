@@ -1,4 +1,5 @@
 {
+  "budgetPath": "path/to/my/budget-from-config.json",
   "onlyCategories": ["performance", "seo"],
   "chromeFlags": "--window-size 800,600",
   "throttling-method": "devtools",
