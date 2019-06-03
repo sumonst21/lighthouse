@@ -89,6 +89,7 @@ function getFlags(manualArgv) {
         ],
         'Configuration:')
       .describe({
+        'cli-flags-path': 'The path to a JSON file that contains the desired CLI flags to apply. Flags specified at the command line will still override the file-based ones.',
         // We don't allowlist specific locales. Why? So we can support the user who requests 'es-MX' (unsupported) and we'll fall back to 'es' (supported)
         'locale': 'The locale/language the report should be formatted in',
         'enable-error-reporting':
