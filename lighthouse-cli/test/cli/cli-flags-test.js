@@ -29,6 +29,23 @@ describe('CLI bin', function() {
     });
   });
 
+  it('settings are accepted from a file path', () => {
+    const flags = getFlags([
+      'http://www.example.com',
+      `--cli-settings-path="${__dirname}/../fixtures/cli-settings-path.json"`,
+    ].join(' '));
+
+    expect(flags).toMatchObject({
+      onlyCategories: ['performance', 'seo'],
+      chromeFlags: '--window-size 800,600',
+      throttlingMethod: 'devtools',
+      throttling: {
+        requestLatencyMs: 700,
+        cpuSlowdownMultiplier: 6,
+      },
+    });
+  });
+
   it('array values support csv when appropriate', () => {
     const flags = getFlags([
       'http://www.example.com',

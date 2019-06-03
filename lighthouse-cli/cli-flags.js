@@ -62,6 +62,9 @@ function getFlags(manualArgv) {
           'lighthouse <url> --only-categories=performance,pwa',
           'Only run specific categories.')
 
+      // Accept a file for all of these flags.
+      .config('cli-settings-path')
+
       // List of options
       .group(['verbose', 'quiet'], 'Logging:')
       .describe({
