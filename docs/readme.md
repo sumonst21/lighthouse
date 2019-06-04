@@ -119,12 +119,9 @@ instance with an open debugging port.
 
 When testing a site with an untrusted certificate, Chrome will be unable to load the page and so the Lighthouse report will mostly contain errors.
 
-If this certificate **is one you control** and is necessary for development (for instance, `localhost` with a self-signed certificate for local HTTP/2 testing), you can
+If this certificate **is one you control** and is necessary for development (for instance, `localhost` with a self-signed certificate for local HTTP/2 testing), we recommend you _add the certificate to your locally-trusted certificate store_. In Chrome, see `Settings` > `Privacy and Security` > `Manage certificates` or consult instructions for adding to the certificate store in your operating system.
 
-- add the certificate to your locally-trusted certificate store. In Chrome, see `Settings` > `Privacy and Security` > `Manage certificates` or consult instructions for adding to the certificate store in your operating system.
-- instruct Chrome to ignore the invalid certificate by adding the Lighthouse CLI flag `--chrome-flags="--ignore-certificate-errors"`.
-
-Be as careful with this flag as you would when browsing the internet with TLS disabled. Any content loaded by the test page (e.g. third-party scripts or iframed ads) will *also* not be subject to certificate checks, [opening up avenues for MitM attacks](https://www.chromium.org/Home/chromium-security/education/tls#TOC-What-security-properties-does-TLS-give-me-).
+Alternatively, you can instruct Chrome to ignore the invalid certificate by adding the Lighthouse CLI flag `--chrome-flags="--ignore-certificate-errors"`. However, you must be as careful with this flag as you would when browsing the internet with TLS disabled. Any content loaded by the test page (e.g. third-party scripts or iframed ads) will *also* not be subject to certificate checks, [opening up avenues for MitM attacks](https://www.chromium.org/Home/chromium-security/education/tls#TOC-What-security-properties-does-TLS-give-me-). For these reasons, we recommend the earlier solution of adding the certificate to your local cert store.
 
 ## Testing on a mobile device
 
